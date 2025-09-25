@@ -1,0 +1,35 @@
+{
+  "name": "veloxx-wasm-tests",
+  "version": "1.0.0",
+  "description": "WASM bindings tests for Velox",
+  "scripts": {
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "build": "rimraf pkg && wasm-pack build --target web -- --no-default-features --features wasm",
+    "release": "npm run build && npm publish ./pkg"
+  },
+  "devDependencies": {
+    "jest": "^29.0.0",
+    "jest-environment-jsdom": "^29.0.0",
+    "jest-transform-stub": "^2.0.0",
+    "rimraf": "^6.0.1"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "transform": {
+      "^.+\\.js$": "babel-jest",
+      "^.+\\.wasm$": "jest-transform-stub"
+    },
+    "moduleNameMapper": {
+      "\\.(wasm)$": "jest-transform-stub"
+    },
+    "testMatch": [
+      "**/tests/**/*.test.js"
+    ]
+  },
+  "dependencies": {
+    "alasql": "^4.6.6",
+    "danfojs": "^1.2.0",
+    "lodash": "^4.17.21"
+  }
+}
